@@ -4,6 +4,14 @@ import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
+export type Invoice = {
+    id: string; // Will be created on the database
+    customer_id: string;
+    amount: number; // Stored in cents
+    status: 'pending' | 'paid';
+    date: string;
+};
+
 const FormSchema = z.object({
     id: z.string(),
     customerId: z.string({
